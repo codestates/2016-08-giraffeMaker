@@ -1,7 +1,7 @@
 //prototypal inheritence
 
 var giraffeMaker = function(name, height) {
-  var newGiraffe = Object.create(giraffeMaker.stuff);
+  var newGiraffe = Object.create(giraffeMaker.prototype);
   newGiraffe.name = name;
   newGiraffe.height = height;
   newGiraffe.hunger = 10;
@@ -9,17 +9,15 @@ var giraffeMaker = function(name, height) {
   return newGiraffe;
 };
 
-giraffeMaker.stuff = {};
-
-giraffeMaker.stuff.isTallEnough = function(treeHeight) {
+giraffeMaker.prototype.isTallEnough = function(treeHeight) {
     return this.height > treeHeight;
   };
 
-giraffeMaker.stuff.isHungry = function() {
+giraffeMaker.prototype.isHungry = function() {
   return this.hunger > 0;
 };
 
-giraffeMaker.stuff.say = function(option) {
+giraffeMaker.prototype.say = function(option) {
   var sentences = {
     'greet': 'Hello, my name is ' + this.name + ', it is nice to meet you.',
     'notHungry': this.name + ' is not hungry.',
@@ -30,7 +28,7 @@ giraffeMaker.stuff.say = function(option) {
   return console.log(sentences[option]);
 };
 
-giraffeMaker.stuff.eat = function() {
+giraffeMaker.prototype.eat = function() {
   if (this.isHungry()) {
     this.hunger -= this.height;
     this.say('ate');
@@ -39,7 +37,7 @@ giraffeMaker.stuff.eat = function() {
   }
 };
 
-giraffeMaker.stuff.browse = function() {
+giraffeMaker.prototype.browse = function() {
   if (this.isTallEnough(2)) {
     this.eat();
   } else {

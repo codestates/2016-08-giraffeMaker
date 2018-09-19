@@ -1,7 +1,7 @@
-//prototypal inheritence
+var methods = {};
 
 var giraffeMaker = function(name, height) {
-  var newGiraffe = Object.create(giraffeMaker.prototype);
+  var newGiraffe = Object.create(methods);
   newGiraffe.name = name;
   newGiraffe.height = height;
   newGiraffe.hunger = 10;
@@ -9,15 +9,15 @@ var giraffeMaker = function(name, height) {
   return newGiraffe;
 };
 
-giraffeMaker.prototype.isTallEnough = function(treeHeight) {
+methods.isTallEnough = function(treeHeight) {
     return this.height > treeHeight;
   };
 
-giraffeMaker.prototype.isHungry = function() {
+methods.isHungry = function() {
   return this.hunger > 0;
 };
 
-giraffeMaker.prototype.say = function(option) {
+methods.say = function(option) {
   var sentences = {
     'greet': 'Hello, my name is ' + this.name + ', it is nice to meet you.',
     'notHungry': this.name + ' is not hungry.',
@@ -28,7 +28,7 @@ giraffeMaker.prototype.say = function(option) {
   return console.log(sentences[option]);
 };
 
-giraffeMaker.prototype.eat = function() {
+methods.eat = function() {
   if (this.isHungry()) {
     this.hunger -= this.height;
     this.say('ate');
@@ -37,7 +37,7 @@ giraffeMaker.prototype.eat = function() {
   }
 };
 
-giraffeMaker.prototype.browse = function() {
+methods.browse = function() {
   if (this.isTallEnough(2)) {
     this.eat();
   } else {
